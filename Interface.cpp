@@ -49,7 +49,34 @@ void Interface::menu5() {
 }
 
 void Interface::menu6() {
-    cout << "Not designed yet";
+    cout << "1. Sorted by Title\n";
+    cout << "2. Sorted by ID\n";
+    cout << "Your choice [1 - 2]: ";
+    int subChoice = this->takeChoice(2);
+    cout << '\n';
+    cout << "1. Sorted assending\n";
+    cout << "2. Sorted desending\n";
+    cout << "Your choice [1 - 2]: ";
+    if (subChoice == 1) {
+        cout << '\n';
+        int subsubChoice = this->takeChoice(2);
+        if (subsubChoice == 1) {
+            this->rs->printAllItemSortedName(0);
+        }
+        if (subsubChoice == 2) {
+            this->rs->printAllItemSortedName(1);
+        }
+    }
+    if (subChoice == 2) {
+        cout << '\n';
+        int subsubChoice = this->takeChoice(2);
+        if (subsubChoice == 1) {
+            this->rs->printAllItemSortedID(0);
+        }
+        if (subsubChoice == 2) {
+            this->rs->printAllItemSortedID(1);
+        }
+    }
 }
 
 void Interface::menu7() {
@@ -57,7 +84,34 @@ void Interface::menu7() {
 }
 
 void Interface::menu8() {
-    cout << "Not designed yet";
+    cout << "1. Sorted by name\n";
+    cout << "2. Sorted by ID\n";
+    cout << "Your choice [1 - 2]: ";
+    int subChoice = this->takeChoice(2);
+    cout << '\n';
+    cout << "1. Sorted assending\n";
+    cout << "2. Sorted desending\n";
+    cout << "Your choice [1 - 2]: ";
+    if (subChoice == 1) {
+        cout << '\n';
+        int subsubChoice = this->takeChoice(2);
+        if (subsubChoice == 1) {
+            this->rs->printAllCustomerSortedName(0);
+        }
+        if (subsubChoice == 2) {
+            this->rs->printAllCustomerSortedName(1);
+        }
+    }
+    if (subChoice == 2) {
+        cout << '\n';
+        int subsubChoice = this->takeChoice(2);
+        if (subsubChoice == 1) {
+            this->rs->printAllCustomerSortedID(0);
+        }
+        if (subsubChoice == 2) {
+            this->rs->printAllCustomerSortedID(1);
+        }
+    }
 }
 
 void Interface::menu9() {

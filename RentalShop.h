@@ -49,6 +49,11 @@ public:
 	void displayGroup(string groupType);
 	void printAll();
 
+	void printAllCustomerSortedName(int type);
+	void printAllCustomerSortedID(int type);
+	void printAllItemSortedName(int type);
+	void printAllItemSortedID(int type);
+
 	/*delete vector pointer*/
 	void deletePointerVector();
 	

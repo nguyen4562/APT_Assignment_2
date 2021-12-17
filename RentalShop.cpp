@@ -310,5 +310,177 @@ void RentalShop::printAll() {
         cout << items[i]->toString() << endl;
     }
 }
+
+void RentalShop::printAllCustomerSortedName(int type) {
+    int miniPos;
+    if (type == 0) {
+        for (unsigned int i = 0; i < customers.size(); i++)
+        {
+            miniPos = i;
+            for (unsigned int j = i + 1; j < customers.size(); j++)
+            {
+                if (customers[j]->getName() < customers[miniPos]->getName()) //Change was here!
+                {
+                    miniPos = j;
+                }
+            }
+
+            Customer* temp = customers[miniPos];
+            customers[miniPos] = customers[i];
+            customers[i] = temp;
+        }
+    }
+    if (type == 1) {
+        for (unsigned int i = 0; i < customers.size(); i++)
+        {
+            miniPos = i;
+            for (unsigned int j = i + 1; j < customers.size(); j++)
+            {
+                if (customers[j]->getName() > customers[miniPos]->getName()) //Change was here!
+                {
+                    miniPos = j;
+                }
+            }
+
+            Customer* temp = customers[miniPos];
+            customers[miniPos] = customers[i];
+            customers[i] = temp;
+        }
+    }
+
+    for (unsigned int i = 0; i < customers.size(); i++) {
+        cout << customers[i]->toString() << endl;
+    }
+    
+}
+
+void RentalShop::printAllCustomerSortedID(int type) {
+    int miniPos;
+    if (type == 0) {
+        for (unsigned int i = 0; i < customers.size(); i++)
+        {
+            miniPos = i;
+            for (unsigned int j = i + 1; j < customers.size(); j++)
+            {
+                if (customers[j]->getID() < customers[miniPos]->getID()) //Change was here!
+                {
+                    miniPos = j;
+                }
+            }
+
+            Customer* temp = customers[miniPos];
+            customers[miniPos] = customers[i];
+            customers[i] = temp;
+        }
+    }
+    if (type == 1) {
+        for (unsigned int i = 0; i < customers.size(); i++)
+        {
+            miniPos = i;
+            for (unsigned int j = i + 1; j < customers.size(); j++)
+            {
+                if (customers[j]->getID() > customers[miniPos]->getID()) //Change was here!
+                {
+                    miniPos = j;
+                }
+            }
+
+            Customer* temp = customers[miniPos];
+            customers[miniPos] = customers[i];
+            customers[i] = temp;
+        }
+    }
+
+    for (unsigned int i = 0; i < customers.size(); i++) {
+        cout << customers[i]->toString() << endl;
+    }
+
+}
+
+void RentalShop::printAllItemSortedName(int type) {
+    int miniPos;
+    if (type == 0) {
+        for (unsigned int i = 0; i < items.size(); i++)
+        {
+            miniPos = i;
+            for (unsigned int j = i + 1; j < items.size(); j++)
+            {
+                if (items[j]->getTitle() < items[miniPos]->getTitle()) //Change was here!
+                {
+                    miniPos = j;
+                }
+            }
+
+            Item* temp = items[miniPos];
+            items[miniPos] = items[i];
+            items[i] = temp;
+        }
+    }
+    if (type == 1) {
+        for (unsigned int i = 0; i < items.size(); i++)
+        {
+            miniPos = i;
+            for (unsigned int j = i + 1; j < items.size(); j++)
+            {
+                if (items[j]->getTitle() > items[miniPos]->getTitle()) //Change was here!
+                {
+                    miniPos = j;
+                }
+            }
+
+            Item* temp = items[miniPos];
+            items[miniPos] = items[i];
+            items[i] = temp;
+        }
+    }
+
+    for (unsigned int i = 0; i < items.size(); i++) {
+        cout << items[i]->toString() << endl;
+    }
+
+}
+
+void RentalShop::printAllItemSortedID(int type) {
+    int miniPos;
+    if (type == 0) {
+        for (unsigned int i = 0; i < items.size(); i++)
+        {
+            miniPos = i;
+            for (unsigned int j = i + 1; j < items.size(); j++)
+            {
+                if (items[j]->getID() < items[miniPos]->getID()) //Change was here!
+                {
+                    miniPos = j;
+                }
+            }
+
+            Item* temp = items[miniPos];
+            items[miniPos] = items[i];
+            items[i] = temp;
+        }
+    }
+    if (type == 1) {
+        for (unsigned int i = 0; i < items.size(); i++)
+        {
+            miniPos = i;
+            for (unsigned int j = i + 1; j < items.size(); j++)
+            {
+                if (items[j]->getID() > items[miniPos]->getID()) //Change was here!
+                {
+                    miniPos = j;
+                }
+            }
+
+            Item* temp = items[miniPos];
+            items[miniPos] = items[i];
+            items[i] = temp;
+        }
+    }
+
+    for (unsigned int i = 0; i < items.size(); i++) {
+        cout << items[i]->toString() << endl;
+    }
+
+}
 /*End Display*/
 
