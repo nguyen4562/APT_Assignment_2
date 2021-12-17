@@ -269,10 +269,12 @@ void RentalShop::deletePointerVector() {
 }
 
 /*Start Display*/
-void RentalShop::displayNoCopy(vector<Item*> items_no_copy) {
-    int size = items_no_copy.size();
+void RentalShop::displayNoCopy() {
+    int size = this->items.size();
     for (int i = 0; i < size; i++) {
-        cout << items_no_copy[i]->toString() << '\n';
+        if (this->items[i]->getNumOfCopy() == 0) {
+            cout << this->items[i]->toString() << '\n';
+        }
     }
 }
 

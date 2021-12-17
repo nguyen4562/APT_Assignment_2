@@ -70,9 +70,6 @@ void Interface::menu9() {
 
     const char* group[3] = { "Guest", "Regular", "VIP" };
     this->rs->displayGroup(group[subChoice - 1]);
-    vector<Customer*> tmp = this->rs->getCustomers();
-    tmp.clear();
-    this->rs->setCustomers(tmp);
 }
 
 void Interface::menu10() {
@@ -175,6 +172,10 @@ void Interface::option(int menuChoice, RentalShop** rs) {
 }
 
 int Interface::takeChoice(int limit) {
+    /*
+    Choices are between 1 and limit [1 - limit]
+    @param limit: the maximum choice for the input (e.g limit = 3 -> 3 choices)
+    */
     while (true) {
         string input;
         int choice;

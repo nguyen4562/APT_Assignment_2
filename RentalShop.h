@@ -43,7 +43,7 @@ public:
 	vector<Item*> searchNoCopy();
 
 	/*Display*/
-	void displayNoCopy(vector<Item*> items_no_copy);
+	void displayNoCopy();
 	void display(vector<Item*> obj);
 	void display(vector<Customer*> obj);
 	void displayGroup(string groupType);
