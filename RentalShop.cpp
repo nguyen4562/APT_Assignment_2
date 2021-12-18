@@ -254,7 +254,48 @@ vector<Customer*> RentalShop::searchCusName(string name) {
 }
 /*End Search*/
 
-
+Customer* RentalShop::promoteCusID(string input, int type, int typeSearch) {
+    int size = this->customers.size();
+    string check;
+    for (int i = 0; i < size; i++) {
+        if (typeSearch == 0) {
+            check = this->customers[i]->getID();
+        }
+        else if (typeSearch == 1) {
+            check = this->customers[i]->getName();
+        }
+        if (check == input) {
+            if (type == 0 && this->customers[i]->getcustomerType() == "Guest") {
+                cout << "Successfully promote " << this->customers[i]->getName() << " to Regular member\n" << endl;
+                this->customers[i]->setcustomerType("Regular");
+                return this->customers[i];
+            }
+            else if (type == 0 && this->customers[i]->getcustomerType() == "Regular") {
+                cout << "This is already Regular member\n" << endl;
+                return this->customers[i];
+            }
+            else if (type == 0 && this->customers[i]->getcustomerType() == "VIP") {
+                cout << "This is already VIP member can not promote to Regular\n" << endl;
+                return this->customers[i];
+            }
+            if (type == 1 && this->customers[i]->getcustomerType() == "Regular") {
+                cout << "Successfully promote " << this->customers[i]->getName() << " to VIP member\n" << endl;
+                this->customers[i]->setcustomerType("VIP");
+                return this->customers[i];
+            }
+            else if (type == 1 && this->customers[i]->getcustomerType() == "VIP") {
+                cout << "This is already VIP member\n" << endl;
+                return this->customers[i];
+            }
+            else if (type == 1 && this->customers[i]->getcustomerType() == "Guest") {
+                cout << "This is Guest member can not promote to VIP member\n" << endl;
+                return this->customers[i];
+            }
+        }
+    }
+    cout << "Your input does not existing in the database\n" << endl;
+    return NULL;
+}
 
 /*delete pointer vector*/
 void RentalShop::deletePointerVector() {
@@ -291,6 +332,7 @@ void RentalShop::display(vector<Customer*> obj) {
         cout << obj[i]->toString() << '\n';
     }
 }
+
 
 void RentalShop::displayGroup(string groupType) {
     int size = this->customers.size();

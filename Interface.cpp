@@ -37,7 +37,80 @@ void Interface::menu2() {
 }
 
 void Interface::menu3() {
-    cout << "Not designed yet";
+    cout << "1. Promote custormer by ID\n";
+    cout << "2. Promote custormer by Name\n";
+    cout << "Your choice [1 - 2]: ";
+    int subChoice = this->takeChoice(2);
+    if (subChoice == 1) {
+        cout << '\n';
+        cout << "1. Promote customer from Guest to Regular\n";
+        cout << "2. Promote customer from Regular to VIP\n";
+        cout << "Your choice [1 - 2]: ";
+        int subsubChoice = this->takeChoice(2);
+        cout << '\n';
+        string word;
+        if (subsubChoice == 1) {
+            while (true)
+            {
+                cout << "ID: ";
+                getline(cin, word);
+                cout << '\n';
+                Customer* i1 = this->rs->promoteCusID(word, 0, 0);
+                if (i1 != NULL) {
+                    cout << i1->toString();
+                    break;
+                }
+            }
+        }
+        else if (subsubChoice == 2) {
+            while (true)
+            {
+                cout << "ID: ";
+                getline(cin, word);
+                cout << '\n';
+                Customer* i1 = this->rs->promoteCusID(word, 1, 0);
+                if (i1 != NULL) {
+                    cout << i1->toString();
+                    break;
+                } 
+            }
+        }
+    }
+    if (subChoice == 2) {
+        cout << '\n';
+        cout << "1. Promote customer from Guest to Regular\n";
+        cout << "2. Promote customer from Regular to VIP\n";
+        cout << "Your choice [1 - 2]: ";
+        int subsubChoice = this->takeChoice(2);
+        cout << '\n';
+        string word;
+        if (subsubChoice == 1) {
+            while (true)
+            {
+                cout << "Name: ";
+                getline(cin, word);
+                cout << '\n';
+                Customer* i1 = this->rs->promoteCusID(word, 0, 1);
+                if (i1 != NULL) {
+                    cout << i1->toString();
+                    break;
+                }
+            }
+        }
+        else if (subsubChoice == 2) {
+            while (true)
+            {
+                cout << "Name: ";
+                getline(cin, word);
+                cout << '\n';
+                Customer* i1 = this->rs->promoteCusID(word, 1, 1);
+                if (i1 != NULL) {
+                    cout << i1->toString();
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void Interface::menu4() {

@@ -42,6 +42,8 @@ public:
 	vector<Customer*> searchCusName(string name);
 	vector<Item*> searchNoCopy();
 
+	Customer* promoteCusID(string ID, int type, int typeSearch);
+
 	/*Display*/
 	void displayNoCopy();
 	void display(vector<Item*> obj);
