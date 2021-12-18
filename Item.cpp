@@ -54,6 +54,16 @@ bool Item::getStatus() {
 void Item::setStatus(bool status) {
 	this->status = status;
 }
+/*sett all*/
+void Item::setAll(string id, string title, string rentaltype, int numLoanType, string loanType, int numOfCopy, float fee) {
+	this->id = id;
+	this->title = title;
+	this->rentalType = rentaltype;
+	this->numLoanType = numLoanType;
+	this->loanType = loanType;
+	this->numOfCopy = numOfCopy;
+	this->fee = fee;
+}
 
 Item::Item() {
 

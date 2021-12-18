@@ -38,6 +38,7 @@ public:
 	void setNumOfCopy(int numOfCopy);
 	void setFee(float fee);
 	void setStatus(bool status);
+	void setAll(string id, string titel, string rentaltype, int numLoanType, string loanType, int numOfCopy, float fee);
 
 	/*show item information*/
 	virtual string toString();

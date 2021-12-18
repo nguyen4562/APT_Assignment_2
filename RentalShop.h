@@ -12,18 +12,13 @@
 #include "VipAccount.h"
 #include "GuestAccount.h"
 #include "RegularAccount.h"
+#include "Validation.h"
 class RentalShop
 {
 private:
 	//vector<Customer*> customers;
 	vector<Item*> items;
 	vector<Customer*> customers;
-	/*Read one line of the Items.txt file to check which rental type the line is*/
-	static void readOneItemInItemFile(ifstream& filein, Item* item, string& genre);
-	static int checkTypeItem(Item* item);
-	static void readFileItem(ifstream& filein, vector<Item*>& items);
-	static void readOneCustomerInCustomerFile(ifstream& filein, Customer* customer);
-	static void readFileCustomer(ifstream& filein, vector<Customer*>& customers);
 public:
 	
 	RentalShop(ifstream& filein, ifstream& fileinCustomer);
