@@ -212,22 +212,7 @@ void Interface::menu10() {
         cout << "Your choice [1 - 2]: ";
         subChoice = this->takeChoice(2);
 
-        cout << '\n';
-        string word;
-        if (subChoice == 1) {
-            cout << "ID: ";
-            getline(cin, word);
-            cout << '\n';
-            Item* i1 = this->rs->searchItemID(word);
-            cout << i1->toString();
-        }
-        else if (subChoice == 2) {
-            cout << "Title: ";
-            getline(cin, word);
-            cout << '\n';
-            vector<Item*> i1 = this->rs->searchItemTitle(word);
-            this->rs->display(i1);
-        }
+        this->menu10_1(subChoice);
     }
     else if (subChoice == 2) {
         cout << '\n';
@@ -236,22 +221,69 @@ void Interface::menu10() {
         cout << "Your choice [1 - 2]: ";
         subChoice = this->takeChoice(2);
 
-        cout << '\n';
-        string word;
-        if (subChoice == 1) {
+        this->menu10_2(subChoice);
+    }
+}
+
+void Interface::menu10_1(int subChoice) {
+    cout << '\n';
+    string word;
+    if (subChoice == 1) {
+        Item* i1;
+        while (true) {
             cout << "ID: ";
             getline(cin, word);
             cout << '\n';
-            Customer* c1 = this->rs->searchCusID(word);
-            cout << c1->toString();
+            i1 = this->rs->searchItemID(word);
+            if (i1 != NULL) {
+                break;
+            }
         }
-        else if (subChoice == 2) {
+        cout << i1->toString();
+    }
+    else if (subChoice == 2) {
+        vector<Item*> i1;
+        while (true) {
+            cout << "Title: ";
+            getline(cin, word);
+            cout << '\n';
+            i1 = this->rs->searchItemTitle(word);
+            if (i1.size() != 0) {
+                break;
+            }
+        }
+        this->rs->display(i1);
+    }
+}
+
+void Interface::menu10_2(int subChoice) {
+    cout << '\n';
+    string word;
+    if (subChoice == 1) {
+        Customer* c1;
+        while (true) {
+            cout << "ID: ";
+            getline(cin, word);
+            cout << '\n';
+            c1 = this->rs->searchCusID(word);
+            if (c1 != NULL) {
+                break;
+            }
+        }
+        cout << c1->toString();
+    }
+    else if (subChoice == 2) {
+        vector<Customer*> c1;
+        while (true) {
             cout << "Name: ";
             getline(cin, word);
             cout << '\n';
-            vector<Customer*> c1 = this->rs->searchCusName(word);
-            this->rs->display(c1);
+            c1 = this->rs->searchCusName(word);
+            if (c1.size() != 0) {
+                break;
+            }
         }
+        this->rs->display(c1);
     }
 }
 
@@ -308,11 +340,12 @@ int Interface::takeChoice(int limit) {
         int choice;
         getline(cin, input);
 
-        while (cin.fail() || cin.eof() || input.find_first_not_of("0123456789") != string::npos) {
+        while (cin.fail() || cin.eof() || input.find_first_not_of("0123456789") != string::npos || input.size() == 0) {
             cout << "Require number in range [1 - " << limit << "]: ";
-            if (input.find_first_not_of("0123456789") == string::npos) {
+            if (input.find_first_not_of("0123456789") == string::npos || input.size() == 0) {
                 cin.clear();
-                cin.ignore(256, '\n');
+                //cin.ignore(256, '\n');
+                //cout << "REACH" << '\n';
             }
             getline(cin, input);
         }

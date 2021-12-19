@@ -65,7 +65,7 @@ Item* RentalShop::searchItemID(string ID) {
 }
 
 Customer* RentalShop::searchCusID(string ID) {
-    int size = this->items.size();
+    int size = this->customers.size();
     for (int i = 0; i < size; i++) {
         if (this->customers[i]->getID() == ID) {
             return this->customers[i];

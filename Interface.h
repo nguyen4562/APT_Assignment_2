@@ -24,6 +24,8 @@ public:
     void menu8();
     void menu9();
     void menu10();
+    void menu10_1(int subChoice);
+    void menu10_2(int subChoice);
 
     void option(int choice, RentalShop** rs);
     int takeChoice(int limit);
