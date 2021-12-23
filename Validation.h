@@ -19,6 +19,7 @@ private:
 // ITEM FILE
 	static bool checkNullField(string field);
 	static bool checkIdItem(string id, vector<string>& IDs);
+	static bool validateIdItem(string id);
 	static bool checkRentalType(string rentalType);
 	static void checkLoan(string loan, int& numLoanType, string& loanType);
 	static bool checkFee(string fee);
