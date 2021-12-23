@@ -14,6 +14,11 @@ bool Validation::checkNullField(string field) {
 /*check ID Item format*/
 bool Validation::checkIdItem(string id, vector<string>& IDs) {
     // if id is not a null field
+    if (id.size() < 9) {
+        cout << "Item Id is wrong format" << endl;
+        return false;
+    }
+    // if id is not a null field
     if (checkNullField(id)) {
         if (id[0] == 'I' && id[4] == '-') {
             bool checkNum = true;
@@ -44,6 +49,35 @@ bool Validation::checkIdItem(string id, vector<string>& IDs) {
         return false;
     }
     cout << "ID is empty!" << endl;
+    return false;
+}
+bool Validation::validateIdItem(string id) {
+    // if id is not a null field
+    if (id.size() < 9) {
+        cout << "Item Id is wrong format" << endl;
+        return false;
+    }
+
+    if (checkNullField(id)) {
+        if (id[0] == 'I' && id[4] == '-') {
+            bool checkNum = true;
+            // check the next 3 digits
+            for (int i = 1; i < id.length(); i++) {
+                if (i == 4) continue;
+                if (!isdigit(id[i])) {
+                    checkNum = false;
+                }
+            }
+            if (checkNum) {
+                // convert substr from index 5 to a number
+                int year = stoi(id.substr(5, id.length() - 5));
+                // validate year
+                if (year >= 1000 && year <= 2021) {
+                    return true;
+                }
+            }
+        }
+    }
     return false;
 }
 /*check Rental Type*/
@@ -325,21 +359,21 @@ void Validation::readOneCustomerInCustomerFile(ifstream& filein, Customer* custo
     string items = "";
     // check the number of rental 
     bool checkId = true;
-    if (checkRental) {
+    if (checkRental && atoi(numOfRentals.c_str()) > 0) {
         int space_back = 0; // the size to move back
         int temp_space_back = 0;
         for (;;) {
             if (filein.tellg() == -1) break;
+            space_back = filein.tellg();
             getline(filein, items);
-            space_back = filein.tellg(); // the size to move back
-            if (validateLine(items)) {
-                filein.seekg(temp_space_back - space_back, ios_base::cur);
-                break;
-            }
-            else {
+            temp_space_back = filein.tellg(); // the size to move back
+            if (validateIdItem(items)) {
                 checkId = checkIdItem(items, listItem);
             }
-            temp_space_back = space_back;
+            else if (validateLine(items)) {
+                filein.seekg(-temp_space_back + space_back, ios_base::cur);
+                break;
+            }
         }
     }
     if (checkId && checkRental && checkCustomer(id, CUSs, name, address, phone, numOfRentals, customerType, listItem)) {
