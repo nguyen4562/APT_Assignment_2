@@ -15,5 +15,6 @@ RegularAccount::~RegularAccount() {
 
 }
 string RegularAccount::toString() {
+	cout << "REGULAR ACCOUNT" << endl;
 	return Customer::toString();
 }

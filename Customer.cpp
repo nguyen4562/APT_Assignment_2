@@ -43,6 +43,21 @@ void Customer::setListOfRentals(vector<string> listOfRentals) {
 	this->listOfRentals = listOfRentals;
 }
 
+int Customer::getBorrowedDVD() {
+	return this->borrowedDVD;
+}
+void Customer::setBorrowedDVD(int numReturn) {
+	this->borrowedDVD = numReturn;
+}
+void Customer::setBorrowedDVD(bool numReturn) {
+	if (numReturn) {
+		this->borrowedDVD += 1;
+	}
+	else {
+		this->borrowedDVD += 1;
+	}
+}
+
 /*Constuctor*/
 Customer::Customer() {
 
