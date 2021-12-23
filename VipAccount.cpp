@@ -15,5 +15,5 @@ VipAccount::~VipAccount() {
 
 }
 string VipAccount::toString() {
-	return Customer::toString() + "\nVipAccount object!";
+	return Customer::toString();
 }

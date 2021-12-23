@@ -15,5 +15,5 @@ GuestAccount::~GuestAccount() {
 
 }
 string GuestAccount::toString() {
-	return Customer::toString() + "\nGuestAccount object!";
+	return Customer::toString();
 }

@@ -15,5 +15,5 @@ RegularAccount::~RegularAccount() {
 
 }
 string RegularAccount::toString() {
-	return Customer::toString() + "\nRegularAccount object!";
+	return Customer::toString();
 }

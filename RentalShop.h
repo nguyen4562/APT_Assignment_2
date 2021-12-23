@@ -38,6 +38,7 @@ public:
 	vector<Item*> searchNoCopy();
 
 	Customer* promoteCusID(string ID, int type, int typeSearch);
+	bool returnItem(string input, string item, int typeSearch);
 
 	/*Display*/
 	void displayNoCopy();
@@ -53,7 +54,5 @@ public:
 
 	/*delete vector pointer*/
 	void deletePointerVector();
-	
-	
 };
 

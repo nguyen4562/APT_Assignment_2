@@ -86,6 +86,54 @@ vector<Customer*> RentalShop::searchCusName(string name) {
 }
 /*End Search*/
 
+bool RentalShop::returnItem(string input, string item, int typeSearch) {
+    int size = this->customers.size();
+    string checkCus, checkItem;
+    int count = 0;
+    if (searchItemID(item) == NULL) {
+        cout << "Failed return !!! Your item ID input does not existing in the database" << endl;
+        return false;
+    }
+    for (int i = 0; i < size; i++) {
+        if (typeSearch == 0) { checkCus = this->customers[i]->getID(); }
+        else if (typeSearch == 1) { checkCus = this->customers[i]->getName(); }
+        if (checkCus == input) {
+            vector <string> ListOfRental = this->customers[i]->getListOfRentals();
+            int sizeItem = this->customers[i]->getListOfRentals().size();
+            if (sizeItem == 0 && searchItemID(item) != NULL) {
+                cout << "Failed return !!! The list of rental of " << this->customers[i]->getName() << " is null.\n" << endl;
+                cout << "CURRENTLY CUSTORMER STATUS" << endl;
+                cout << this->customers[i]->toString();
+                return true;
+            }
+            for (int j = 0; j < sizeItem; j++) {
+                if (ListOfRental[j] == item) {
+                    Item* newitem = searchItemID(ListOfRental[j]);
+                    newitem->setNumOfCopy(newitem->getNumOfCopy() + 1);
+                    this->customers[i]->setNumOfRentals(this->customers[i]->getnumOfRentals() - 1);
+                    ListOfRental.erase(ListOfRental.begin() + j);
+                    this->customers[i]->setListOfRentals(ListOfRental);
+                    cout << "Successfully return " << newitem->getTitle() << " item (ID: " << newitem->getID() << ") for " << this->customers[i]->getName() << ".\n" << endl;
+                    cout << "CURRENTLY CUSTORMER STATUS" << endl;
+                    cout << this->customers[i]->toString();
+                    cout << "CURRENTLY ITEM STATUS" << endl;
+                    cout << newitem->toString();
+                    return true;
+                }
+                if (ListOfRental[j] != item) { count += 1; }
+                if (count == sizeItem) {
+                    cout << "Failed return !!! " << this->customers[i]->getName() << " has not rent this item before." << endl;
+                    cout << searchItemID(ListOfRental[j])->toString();
+                    return true;
+                }
+            }
+        }
+    }
+    if (typeSearch == 0) { cout << "Your custormer ID input does not existing in the database" << endl; }
+    else if (typeSearch == 1) { cout << "Your custormer name input does not existing in the database" << endl; }
+    return false;
+}
+
 Customer* RentalShop::promoteCusID(string input, int type, int typeSearch) {
     int size = this->customers.size();
     string check;
@@ -100,7 +148,10 @@ Customer* RentalShop::promoteCusID(string input, int type, int typeSearch) {
             if (type == 0 && this->customers[i]->getcustomerType() == "Guest") {
                 cout << "Successfully promote " << this->customers[i]->getName() << " to Regular member\n" << endl;
                 this->customers[i]->setcustomerType("Regular");
-                return this->customers[i];
+                RegularAccount* newRegular = new RegularAccount(this->customers[i]);
+                customers.push_back(newRegular);
+                this->customers[i]->~Customer();
+                return newRegular;
             }
             else if (type == 0 && this->customers[i]->getcustomerType() == "Regular") {
                 cout << "This is already Regular member\n" << endl;
@@ -113,7 +164,10 @@ Customer* RentalShop::promoteCusID(string input, int type, int typeSearch) {
             if (type == 1 && this->customers[i]->getcustomerType() == "Regular") {
                 cout << "Successfully promote " << this->customers[i]->getName() << " to VIP member\n" << endl;
                 this->customers[i]->setcustomerType("VIP");
-                return this->customers[i];
+                VipAccount* newVip = new VipAccount(this->customers[i]);
+                customers.push_back(newVip);
+                this->customers[i]->~Customer();
+                return newVip;
             }
             else if (type == 1 && this->customers[i]->getcustomerType() == "VIP") {
                 cout << "This is already VIP member\n" << endl;

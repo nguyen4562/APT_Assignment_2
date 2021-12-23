@@ -2,9 +2,11 @@
 
 Interface::Interface() {
     this->menuChoice = 0;
+    this->rs = NULL;
 }
 
 void Interface::menu() {
+    cout << "\n************************************************************************\n\n";
     cout << "Welcome to Genie’s video store\n";
     cout << "Enter an option below\n";
     cout << "1.  Add a new item, update or delete an existing item\n";
@@ -118,7 +120,42 @@ void Interface::menu4() {
 }
 
 void Interface::menu5() {
-    cout << "Not designed yet";
+    cout << "1. Return item for custormer by ID\n";
+    cout << "2. Return item for custormer by Name\n";
+    cout << "Your choice [1 - 2]:";
+    int subChoice = this->takeChoice(2);
+    if (subChoice == 1) {
+        string word, item;
+        while (true)
+        {
+            cout << "\nID of customer to return: ";
+            getline(cin, word);
+            cout << "ID of item to return: ";
+            getline(cin, item);
+            cout << '\n';
+            bool newitem = this->rs->returnItem(word, item, 0);
+            if (newitem) {
+                newitem;
+                break;
+            }
+        }
+    }
+    if (subChoice == 2) {
+        string word, item;
+        while (true)
+        {
+            cout << "\nName of customer to return: ";
+            getline(cin, word);
+            cout << "ID of item to return: ";
+            getline(cin, item);
+            cout << '\n';
+            bool newitem = this->rs->returnItem(word, item, 1);
+            if (newitem) {
+                newitem;
+                break;
+            }
+        }
+    }
 }
 
 void Interface::menu6() {
@@ -233,9 +270,9 @@ void Interface::menu10_1(int subChoice) {
         while (true) {
             cout << "ID: ";
             getline(cin, word);
-            cout << '\n';
             i1 = this->rs->searchItemID(word);
             if (i1 != NULL) {
+                cout << '\n';
                 break;
             }
         }
@@ -246,9 +283,9 @@ void Interface::menu10_1(int subChoice) {
         while (true) {
             cout << "Title: ";
             getline(cin, word);
-            cout << '\n';
             i1 = this->rs->searchItemTitle(word);
             if (i1.size() != 0) {
+                cout << '\n';
                 break;
             }
         }
@@ -264,9 +301,9 @@ void Interface::menu10_2(int subChoice) {
         while (true) {
             cout << "ID: ";
             getline(cin, word);
-            cout << '\n';
             c1 = this->rs->searchCusID(word);
             if (c1 != NULL) {
+                cout << '\n';
                 break;
             }
         }
@@ -277,9 +314,9 @@ void Interface::menu10_2(int subChoice) {
         while (true) {
             cout << "Name: ";
             getline(cin, word);
-            cout << '\n';
             c1 = this->rs->searchCusName(word);
             if (c1.size() != 0) {
+                cout << '\n';
                 break;
             }
         }
