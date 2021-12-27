@@ -14,9 +14,6 @@ protected:
 	int numOfRentals;
 	string customerType;
 	vector<string> listOfRentals;
-
-	int borrowedDVD;
-
 public:
 	
 	
@@ -27,10 +24,6 @@ public:
 	int getnumOfRentals();
 	string getcustomerType();
 	vector<string> getListOfRentals();
-
-	int getBorrowedDVD();
-	void setBorrowedDVD(int numReturn);
-	void setBorrowedDVD(bool numReturn);
 	
 	void setID(string id);
 	void setName(string name);

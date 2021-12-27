@@ -15,6 +15,5 @@ VipAccount::~VipAccount() {
 
 }
 string VipAccount::toString() {
-	cout << "VIP ACCOUNT" << endl;
 	return Customer::toString();
 }

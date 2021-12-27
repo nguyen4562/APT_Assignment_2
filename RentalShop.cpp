@@ -110,16 +110,13 @@ bool RentalShop::returnItem(string input, string item, int typeSearch) {
                 if (ListOfRental[j] == item) {
                     Item* newitem = searchItemID(ListOfRental[j]);
                     newitem->setNumOfCopy(newitem->getNumOfCopy() + 1);
-                    if (newitem->getRentalType() == "DVD") {
-                        this->customers[i]->setBorrowedDVD(true);
-                    }
                     this->customers[i]->setNumOfRentals(this->customers[i]->getnumOfRentals() - 1);
                     ListOfRental.erase(ListOfRental.begin() + j);
                     this->customers[i]->setListOfRentals(ListOfRental);
                     cout << "Successfully return " << newitem->getTitle() << " item (ID: " << newitem->getID() << ") for " << this->customers[i]->getName() << ".\n" << endl;
                     cout << "CURRENTLY CUSTORMER STATUS" << endl;
-                    cout << this->customers[i]->toString() <<endl;
-                    cout << "\nCURRENTLY ITEM STATUS" << endl;
+                    cout << this->customers[i]->toString();
+                    cout << "CURRENTLY ITEM STATUS" << endl;
                     cout << newitem->toString();
                     return true;
                 }
@@ -149,19 +146,12 @@ Customer* RentalShop::promoteCusID(string input, int type, int typeSearch) {
         }
         if (check == input) {
             if (type == 0 && this->customers[i]->getcustomerType() == "Guest") {
-                if (this->customers[i]->getBorrowedDVD() < 3) {
-                    cout << "This member is not eligible to promote to Regular\n" << endl;
-                    cout << "This member need to rent and return successfully " << 3 - this->customers[i]->getBorrowedDVD() <<" DVD items left!\n" << endl;
-                    return this->customers[i];
-                }
-                else if (this->customers[i]->getBorrowedDVD() >= 3) {
-                    cout << "Successfully promote " << this->customers[i]->getName() << " to Regular member\n" << endl;
-                    this->customers[i]->setcustomerType("Regular");
-                    RegularAccount* newRegular = new RegularAccount(this->customers[i]);
-                    customers.push_back(newRegular);
-                    this->customers.erase(this->customers.begin() + i);
-                    return newRegular;
-                }
+                cout << "Successfully promote " << this->customers[i]->getName() << " to Regular member\n" << endl;
+                this->customers[i]->setcustomerType("Regular");
+                RegularAccount* newRegular = new RegularAccount(this->customers[i]);
+                customers.push_back(newRegular);
+                this->customers[i]->~Customer();
+                return newRegular;
             }
             else if (type == 0 && this->customers[i]->getcustomerType() == "Regular") {
                 cout << "This is already Regular member\n" << endl;
@@ -172,19 +162,12 @@ Customer* RentalShop::promoteCusID(string input, int type, int typeSearch) {
                 return this->customers[i];
             }
             if (type == 1 && this->customers[i]->getcustomerType() == "Regular") {
-                if (this->customers[i]->getBorrowedDVD() < 3) {
-                    cout << "This member is not eligible to promote to VIP\n" << endl;
-                    cout << "This member need to rent and return successfully " << 3 - this->customers[i]->getBorrowedDVD() << " DVD items left" << endl;
-                    return this->customers[i];
-                }
-                else {
-                    cout << "Successfully promote " << this->customers[i]->getName() << " to VIP member\n" << endl;
-                    this->customers[i]->setcustomerType("VIP");
-                    VipAccount* newVip = new VipAccount(this->customers[i]);
-                    this->customers.push_back(newVip);
-                    this->customers.erase(this->customers.begin() + i);
-                    return newVip;
-                }
+                cout << "Successfully promote " << this->customers[i]->getName() << " to VIP member\n" << endl;
+                this->customers[i]->setcustomerType("VIP");
+                VipAccount* newVip = new VipAccount(this->customers[i]);
+                customers.push_back(newVip);
+                this->customers[i]->~Customer();
+                return newVip;
             }
             else if (type == 1 && this->customers[i]->getcustomerType() == "VIP") {
                 cout << "This is already VIP member\n" << endl;
@@ -214,8 +197,7 @@ void RentalShop::deletePointerVector() {
 
 /*Start Display*/
 void RentalShop::displayNoCopy() {
-    int size = this->items.size();
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < this->items.size(); i++) {
         if (this->items[i]->getNumOfCopy() == 0) {
             cout << this->items[i]->toString() << '\n';
         }
@@ -223,8 +205,7 @@ void RentalShop::displayNoCopy() {
 }
 
 void RentalShop::display(vector<Item*> obj) {
-    int size = obj.size();
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < obj.size(); i++) {
         cout << obj[i]->toString() << '\n';
     }
 }
